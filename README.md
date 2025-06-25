@@ -16,10 +16,14 @@ This project contains automated UI tests for the BrightHR employee system using 
 ## 🚀 How to Run Tests Locally
 1. Install dependencies:
    
-  npm install
+     npm install
    
 3. Install Playwright browsers:
+
+
    npx playwright install
 
-4. Run tests
+5. Run tests
+
+
     npx playwright test
