@@ -17,11 +17,9 @@ test('login and add employees', async ({ page }) => {
 
   await page.getByRole('link', { name: 'Employees' }).click();
   await page.getByRole('button', { name: 'Add employee' }).click();
-  await page.getByRole('textbox', { name: 'First name' }).click();
   await page.getByRole('textbox', { name: 'First name' }).fill('Lukman');
   await page.getByRole('textbox', { name: 'Last name' }).fill('Ade');
   await page.getByRole('textbox', { name: 'Email address' }).fill('kunlyy2k2@yahoo.com');
-  await page.getByRole('textbox', { name: 'Phone number (optional)' }).click();
   await page.getByRole('textbox', { name: 'Phone number (optional)' }).fill('07713477139');
   await page.click('[data-testid="input-selector"]');
   await page.click(`.DayPicker-Day[${ariaLabel}]`);
@@ -30,13 +28,16 @@ test('login and add employees', async ({ page }) => {
 
 // add another employee
   await page.getByRole('button', { name: 'Add another employee' }).click();
-  await page.locator('#firstName').fill('Ola');
-  await page.locator('#lastName').fill('Lukman');
-  await page.locator('#email').fill('test@testing.com');
-  await page.locator('#phoneNumber').fill('07713377733');
+  await page.getByRole('textbox', { name: 'First name' }).fill('test');
+  await page.getByRole('textbox', { name: 'Last name' }).fill('testing');
+  await page.getByRole('textbox', { name: 'Email address' }).fill('test@yahoo.com');
+  await page.getByRole('textbox', { name: 'Phone number (optional)' }).fill('01234567890');
   await page.click('[data-testid="input-selector"]');
   await page.click(`.DayPicker-Day[${ariaLabel}]`);
-  await page.locator('#jobTitle').fill('QA Analyst');
+  await page.getByRole('textbox', { name: 'Job title (optional)' }).fill('QA Engineer');
+
+  // take a screenshort of the form and save new employee
+  await page.screenshot({ path: 'filled-form.png', fullPage: true });
   await page.getByRole('button', { name: 'Save new employee' }).click();
 
 // navigate to employee tab and verify that both employees are displayed
