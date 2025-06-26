@@ -36,13 +36,21 @@ test('login and add employees', async ({ page }) => {
   await page.click(`.DayPicker-Day[${ariaLabel}]`);
   await page.getByRole('textbox', { name: 'Job title (optional)' }).fill('QA Engineer');
   await page.getByRole('button', { name: 'Save new employee' }).click();
-
-  // take a screenshort of the form
-  await page.screenshot({ path: 'filled-form.png', fullPage: true });
   
+  // take a screenshort of the filed and save new employee
+  await page.screenshot({ path: 'filled-form.png', fullPage: true });
+
 // navigate to employee tab and verify that both employees are displayed
   await page.getByRole('button',{name:"Close modal"}).click();
-  await expect(page.locator("//div[contains(@class,'flex flex-col w-full h-full')]//div[1]//div[1]//div[2]")).toBeVisible();
+  const employees = [
+  { name: 'Lukman Ade' },
+  { name: 'test testing'},
+   ];
+  for (const employee of employees) {
+    const heading = page.getByRole('heading', { name: employee.name }).first();
+  await expect(heading).toBeVisible();
+}
+ 
 
 
 });
